@@ -5,7 +5,7 @@ import JobCard from './JobCard';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <JobCard />
-  </React.StrictMode>
+    <React.StrictMode>
+        <JobCard />
+    </React.StrictMode>
 );
