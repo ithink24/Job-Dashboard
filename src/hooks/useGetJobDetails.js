@@ -27,7 +27,8 @@ function useGetJobDetails() {
     return {
         data,
         setData,
-        loading
+        loading,
+        refetch: getdata
     }
 }
 

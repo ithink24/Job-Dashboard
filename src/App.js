@@ -7,8 +7,9 @@ import useGetJobDetails from './hooks/useGetJobDetails';
 function App() {
     const[showModal, setShowModal] = useState(false);
     const[step, setStep] = useState('step1');
+    const[stepData, setStepdata] = useState({});
 
-    const {data = {}, loading} = useGetJobDetails();
+    const {data = {}, loading, refetch} = useGetJobDetails();
 
     return (
         <div className="w-[100%] px-6 py-4 relative bg-zinc-300">
@@ -26,8 +27,21 @@ function App() {
                 </div>
             </div>
             
-            {step === 'step1' ? <Step1 showModal={showModal} setShowModal={setShowModal} setStep={setStep}/>
-            : <Step2 showModal={showModal} setShowModal={setShowModal} setStep={setStep}/>}
+            {step === 'step1' ? 
+                <Step1 
+                    showModal={showModal}
+                    setShowModal={setShowModal}
+                    setStep={setStep}
+                    setStepdata={setStepdata}
+                />
+                : <Step2
+                    showModal={showModal}
+                    setShowModal={setShowModal}
+                    setStep={setStep}
+                    stepData={stepData}
+                    refetch={refetch}
+                />
+            }
         </div>
     );
 }
