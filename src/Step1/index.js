@@ -14,19 +14,22 @@ const OTHERINPUTCONTROLS = [
     { label: 'Remote type', name: 'remote', placeholder: 'ex. In-office', width: '245px' },
 ]
 
-function Step1({showModal = false, setShowModal = () => {}, setStep = () => {}, setStepdata = () => {} }) {
+const Step1 = ({
+    showModal = false,
+    setShowModal = () => {},
+    setStep = () => {},
+    setStepdata = () => {}
+}) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    console.log(errors, 'errors');
-
-    const onSubmit = (data) => {
+    const onNext = (data) => {
         setStepdata(data);
         setStep('step2');
     };
 
     return (
         <Modal showModal={showModal} setShowModal={setShowModal}>
-            <form onSubmit={handleSubmit(onSubmit)} className="simpleForm">
+            <form onSubmit={handleSubmit(onNext)}>
                 <div className="w-[550px] h-[500px] p-8 bg-white rounded-[10px] border flex-col justify-start items-center inline-flex">
                     <div className="flex-col justify-start items-start gap-7 inline-flex">
                         <div className="w-[513px] h-7 justify-between items-center inline-flex">

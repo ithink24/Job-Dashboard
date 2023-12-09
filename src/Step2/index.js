@@ -34,9 +34,15 @@ const INPUTCONTROLS = [
     },
 ]
 
-function Step2({showModal = false, setShowModal = () => {}, setStep = () => {}, stepData = {}, refetch = () => {} }) {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const{ createJob } = useCreateJob({refetch, setShowModal});
+const Step2 = ({
+    showModal = false,
+    setShowModal = () => {},
+    setStep = () => {},
+    stepData = {},
+    refetch = () => {}
+}) => {
+    const { register, handleSubmit } = useForm();
+    const{ createJob, loading } = useCreateJob({refetch, setShowModal, setStep});
 
     let totalData;
     const onSubmit = (data) => {
@@ -48,9 +54,14 @@ function Step2({showModal = false, setShowModal = () => {}, setStep = () => {}, 
         createJob(totalData);
     };
 
+    const handleClickCancel = () => {
+        setShowModal(false);
+        setStep('step1');
+    }
+
     return (
         <Modal showModal={showModal} setShowModal={setShowModal}>
-            <form onSubmit={handleSubmit(onSubmit)} className="simpleForm">
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="w-[550px] h-[500px] p-8 bg-white rounded-[10px] border flex-col justify-start items-center inline-flex">
                     <div className="flex-col justify-start items-start gap-5 inline-flex">
                         <div className="w-[513px] h-7 justify-between items-center inline-flex">
@@ -95,14 +106,14 @@ function Step2({showModal = false, setShowModal = () => {}, setStep = () => {}, 
 
                         <div className="w-[513px] h-10 justify-end items-center inline-flex gap-4">
                             {[
-                                { text: 'Cancel', onClick: () => setShowModal(false) },
-                                { type: 'submit', text: 'save' },
+                                { text: 'Cancel', onClick: () => handleClickCancel() },
+                                { type: 'submit', text: loading ? 'submitting...' : 'save' },
                             ].map((buttonProps, index) => (
                                 <button
                                     key={index}
                                     onClick={buttonProps.onClick}
                                     type={buttonProps.type}
-                                    className="w-[68px] h-10 px-4 py-2 bg-sky-500 rounded-md shadow justify-center items-center inline-flex cursor-pointer"
+                                    className="h-10 px-4 py-2 bg-sky-500 rounded-md shadow justify-center items-center inline-flex cursor-pointer"
                                     >
                                     <div className="text-white text-base font-medium font-['Poppins'] leading-normal">{buttonProps.text}</div>
                                 </button>
