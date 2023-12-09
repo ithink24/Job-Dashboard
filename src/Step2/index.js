@@ -9,7 +9,11 @@ function Step2({showModal = false, setShowModal = () => {}, setStep = () => {}, 
 
     let totalData;
     const onSubmit = (data) => {
-        totalData = {...data, ...stepData};
+        const {min_experience, max_experience, min_salary, max_salary} = data;
+        const experience = [min_experience, max_experience];
+        const salary = [min_salary, max_salary];
+
+        totalData = {...data, ...stepData, experience, salary};
         createJob(totalData);
     }
 

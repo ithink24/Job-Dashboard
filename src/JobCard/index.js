@@ -2,7 +2,6 @@ import React from 'react'
 import Netflix from '../Images/netflix.png'
 
 function JobCard({data = {}}) {
-    console.log(data, 'dd');
     return (
         <div className="w-[49%] h-100 px-6 py-4 bg-white rounded-[10px] border border-gray-300">
             <div className="justify-between items-start inline-flex">
@@ -12,8 +11,8 @@ function JobCard({data = {}}) {
                     <div className="flex-col justify-start items-start gap-6 flex">
                         <div className="flex-col justify-start items-start flex">
                             <div className="text-black text-2xl font-normal font-['Poppins']">{data?.job_title}</div>
-                            <div className="text-black font-['Poppins']">{data?.company_name}</div>
-                            <div className="text-stone-500 font-['Poppins']">{data?.industry}</div>
+                            <div className="text-black font-['Poppins']">{data?.company} - {data?.industry}</div>
+                            <div className="text-stone-500 font-['Poppins']">{data?.location}</div>
                         </div>
 
                         <div className="h-[120px] flex-col justify-start items-start gap-2 flex">
