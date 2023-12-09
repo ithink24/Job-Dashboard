@@ -1,7 +1,7 @@
 import React from 'react'
 import Netflix from '../Images/netflix.png'
 
-function JobCard({data = {}}) {
+function JobCard({ data = {} }) {
     return (
         <div className="w-[49%] h-100 px-6 py-4 bg-white rounded-[10px] border border-gray-300">
             <div className="justify-between items-start inline-flex">

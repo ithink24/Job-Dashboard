@@ -1,5 +1,4 @@
-const Modal = ({showModal, children}) => {
-    console.log(children, 'childern');
+export const Modal = ({showModal, children}) => {
     return (
         <div>
             {showModal ? (
@@ -16,5 +15,3 @@ const Modal = ({showModal, children}) => {
         </div>
     );
 };
-
-export default Modal;
