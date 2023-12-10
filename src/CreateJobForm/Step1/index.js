@@ -45,7 +45,6 @@ const Step1 = ({
     const onNext = (data) => {
         setStepdata(data);
         setStep('step2');
-        // reset();
     };
 
     const handleClick = () => {
