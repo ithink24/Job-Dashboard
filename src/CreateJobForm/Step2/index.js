@@ -1,8 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Modal } from '../Components/Modal';
-import { InputController } from '../Components/InputController';
-import useCreateJob from '../hooks/useCreateJob';
+import { Modal } from '../../Components/Modal';
+import { InputController } from '../../Components/InputController';
+import useCreateJob from '../../hooks/useCreateJob';
 
 const INPUTCONTROLS = [
     {

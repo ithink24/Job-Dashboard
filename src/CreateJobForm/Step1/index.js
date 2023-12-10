@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Modal } from '../Components/Modal';
-import { InputController } from '../Components/InputController';
+import { Modal } from '../../Components/Modal';
+import { InputController } from '../../Components/InputController';
 
 const INPUTCONTROLS = [
     { label: 'Job title', name: 'job_title', placeholder: 'ex. UX UI Designer', mandatory: true, width: '500px', required: true },
