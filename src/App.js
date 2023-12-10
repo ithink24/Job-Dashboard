@@ -10,23 +10,24 @@ function App() {
 
     const {data = {}, loading, refetch} = useGetJobDetails();
 
-    const handleClick = () => {
-        setShowModal(!showModal);
-    }
-
     return (
         <div className="w-[100%] px-6 py-4 relative bg-zinc-300">
             <div className="px-4 py-2 mb-4 bg-sky-500 rounded-md shadow w-fit cursor-pointer">
-                <button onClick={() => handleClick()}>+ Create New Job</button>    
+                <button onClick={() => setShowModal(!showModal)}>+ Create New Job</button>    
             </div>
 
             <div className="flex flex-wrap gap-7">
-                {data?.length === 0 && loading ?
-                <div className="w-[100%] h-[700px] flex justify-center items-center">
-                    <img src={Loading} alt="loading"/>
-                </div>
+                {loading ?
+                    <div className="w-[100%] h-[700px] flex justify-center items-center">
+                        <img src={Loading} alt="loading"/>
+                    </div>
                 : (data || [])?.map((item) => (
-                    <JobCard data={item} setEdit={setEdit} setShowModal={setShowModal}/>
+                    <JobCard
+                        data={item}
+                        setEdit={setEdit}
+                        setShowModal={setShowModal}
+                        refetch={refetch}
+                    />
                 ))}
             </div>
 

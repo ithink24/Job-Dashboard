@@ -1,9 +1,13 @@
 import React from 'react';
 import EditIcon from '../Images/edit.png';
 import Netflix from '../Images/netflix.png';
+import Delete from '../Images/delete.svg';
+import useDeleteJob from '../hooks/useDeleteJob';
 
-function JobCard({ data = {}, setEdit = () => {}, setShowModal = () => {} }) {
-    const handleClick = () => {
+function JobCard({ data = {}, setEdit = () => {}, setShowModal = () => {}, refetch = () => {} }) {
+    const { DeleteJob } = useDeleteJob({id: data?.id, refetch});
+
+    const handleEdit = () => {
         setEdit(data);
         setShowModal(true);
     }
@@ -36,8 +40,13 @@ function JobCard({ data = {}, setEdit = () => {}, setShowModal = () => {} }) {
                     </div>
                 </div>
 
-                <div className="cursor-pointer" onClick={() => handleClick()}>
-                    <img src={EditIcon} alt='edit' width={20} height={20}/>
+                <div className="flex justify-center items-center gap-4">
+                    <div className="cursor-pointer" onClick={() => handleEdit()}>
+                        <img src={EditIcon} alt='edit' width={20} height={20}/>
+                    </div>
+                    <div className="cursor-pointer" onClick={() => DeleteJob()}>
+                        <img src={Delete} alt="delete" width={20} height={20}/>
+                    </div>
                 </div>
             </div>
         </div>

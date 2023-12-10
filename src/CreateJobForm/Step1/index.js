@@ -2,48 +2,7 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Modal } from '../../Components/Modal';
 import { InputController } from '../../Components/InputController';
-
-const INPUTCONTROLS = [
-    {
-        label: 'Job title',
-        name: 'job_title',
-        placeholder: 'ex. UX UI Designer',
-        mandatory: true,
-        width: '500px',
-        required: true,
-    },
-    {
-        label: 'Company name',
-        name: 'company',
-        placeholder: 'ex. Google',
-        mandatory: true,
-        width: '500px',
-        required: true,
-    },
-    {
-        label: 'Industry',
-        name: 'industry',
-        placeholder: 'ex. Information Technology',
-        mandatory: true,
-        width: '500px',
-        required: true,
-    },
-]
-
-const OTHERINPUTCONTROLS = [
-    {
-        label: 'Location',
-        name: 'location',
-        placeholder: 'ex. Chennai',
-        width: '245px',
-    },
-    {
-        label: 'Remote type',
-        name: 'remote',
-        placeholder: 'ex. In-office',
-        width: '245px',
-    },
-]
+import { INPUTCONTROLS, OTHERINPUTCONTROLS } from './Controls';
 
 const defaultValueControls = (data) =>[
     {  
