@@ -1,31 +1,99 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Modal } from '../../Components/Modal';
 import { InputController } from '../../Components/InputController';
 
 const INPUTCONTROLS = [
-    { label: 'Job title', name: 'job_title', placeholder: 'ex. UX UI Designer', mandatory: true, width: '500px', required: true },
-    { label: 'Company name', name: 'company', placeholder: 'ex. Google', mandatory: true, width: '500px', required: true },
-    { label: 'Industry', name: 'industry', placeholder: 'ex. Information Technology', mandatory: true, width: '500px', required: true},
+    {
+        label: 'Job title',
+        name: 'job_title',
+        placeholder: 'ex. UX UI Designer',
+        mandatory: true,
+        width: '500px',
+        required: true,
+    },
+    {
+        label: 'Company name',
+        name: 'company',
+        placeholder: 'ex. Google',
+        mandatory: true,
+        width: '500px',
+        required: true,
+    },
+    {
+        label: 'Industry',
+        name: 'industry',
+        placeholder: 'ex. Information Technology',
+        mandatory: true,
+        width: '500px',
+        required: true,
+    },
 ]
 
 const OTHERINPUTCONTROLS = [
-    { label: 'Location', name: 'location', placeholder: 'ex. Chennai', width: '245px' },
-    { label: 'Remote type', name: 'remote', placeholder: 'ex. In-office', width: '245px' },
+    {
+        label: 'Location',
+        name: 'location',
+        placeholder: 'ex. Chennai',
+        width: '245px',
+    },
+    {
+        label: 'Remote type',
+        name: 'remote',
+        placeholder: 'ex. In-office',
+        width: '245px',
+    },
+]
+
+const defaultValueControls = (data) =>[
+    {  
+        name: 'job_title',
+        value: data?.job_title || ''
+    },
+    {   
+        name: 'company',
+        value: data?.company || ''
+    },
+    {   
+        name: 'industry',
+        value: data?.industry || ''
+    },
+    {   
+        name: 'location',
+        value: data?.location || ''
+    },
+    {   
+        name: 'remote',
+        value: data?.remote || ''
+    },
 ]
 
 const Step1 = ({
     showModal = false,
     setShowModal = () => {},
     setStep = () => {},
-    setStepdata = () => {}
+    setStepdata = () => {},
+    edit = {},
+    setEdit = () => {},
 }) => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const DEFAULTVALUE = defaultValueControls(edit);
+    const { register, handleSubmit, reset, setValue } = useForm();
+
+    useEffect(() => {
+        DEFAULTVALUE.forEach(({ name, value }) => setValue(name, value));
+    },[setValue, DEFAULTVALUE])
 
     const onNext = (data) => {
         setStepdata(data);
         setStep('step2');
+        // reset();
     };
+
+    const handleClick = () => {
+        setEdit({});
+        reset();
+        setShowModal(false);
+    }
 
     return (
         <Modal showModal={showModal} setShowModal={setShowModal}>
@@ -38,7 +106,7 @@ const Step1 = ({
                         </div>
 
                         {INPUTCONTROLS.map((inputProps, index) => (
-                            <InputController key={index} {...inputProps} register={register} />
+                            <InputController key={index} {...inputProps} register={register}/>
                         ))}
 
                         <div className="w-[244.50px] h-[60px] gap-5 justify-start items-start flex">
@@ -49,7 +117,7 @@ const Step1 = ({
 
                         <div className="w-[513px] h-10 justify-end items-center inline-flex mt-6 gap-4">
                             {[
-                                { text: 'Cancel', onClick: () => setShowModal(false) },
+                                { text: 'Cancel', onClick: () => handleClick() },
                                 { type: 'submit', text: 'Next' },
                             ].map((buttonProps, index) => (
                                 <button

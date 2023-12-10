@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Modal } from '../../Components/Modal';
 import { InputController } from '../../Components/InputController';
@@ -8,15 +8,31 @@ const INPUTCONTROLS = [
     {
         label: 'Experience',
         inputs: [
-            { name: 'min_experience', placeholder: 'Minimum', width: '245px' },
-            { name: 'max_experience', placeholder: 'Maximum', width: '245px' },
+            {
+                name: 'min_experience',
+                placeholder: 'Minimum',
+                width: '245px'
+            },
+            {
+                name: 'max_experience',
+                placeholder: 'Maximum',
+                width: '245px'
+            },
         ],
     },
     {
         label: 'Salary',
         inputs: [
-            { name: 'min_salary', placeholder: 'Minimum', width: '245px' },
-            { name: 'max_salary', placeholder: 'Maximum', width: '245px' },
+            {
+                name: 'min_salary',
+                placeholder: 'Minimum',
+                width: '245px'
+            },
+            {
+                name: 'max_salary',
+                placeholder: 'Maximum',
+                width: '245px'
+            },
         ],
     },
     {
@@ -34,15 +50,45 @@ const INPUTCONTROLS = [
     },
 ]
 
+const defaultValueControls = (data) =>[
+    {  
+        name: 'min_experience',
+        value: data?.min_experience || ''
+    },
+    {   
+        name: 'max_experience',
+        value: data?.max_experience || ''
+    },
+    {   
+        name: 'min_salary',
+        value: data?.min_salary || ''
+    },
+    {   
+        name: 'max_salary',
+        value: data?.max_salary || ''
+    },
+    {   
+        name: 'total_employee',
+        value: data?.total_employee || ''
+    },
+]
+
 const Step2 = ({
     showModal = false,
     setShowModal = () => {},
     setStep = () => {},
     stepData = {},
-    refetch = () => {}
+    refetch = () => {},
+    edit = {},
+    setEdit = () => {}
 }) => {
-    const { register, handleSubmit } = useForm();
-    const{ createJob, loading } = useCreateJob({refetch, setShowModal, setStep});
+    const DEFAULTVALUE = defaultValueControls(edit);
+    const { register, handleSubmit, reset, setValue } = useForm();
+    const{ createJob, loading } = useCreateJob({refetch, setShowModal, setStep, edit, setEdit, reset});
+
+    useEffect(() => {
+        DEFAULTVALUE.forEach(({ name, value }) => setValue(name, value));
+    },[setValue])
 
     let totalData;
     const onSubmit = (data) => {
@@ -55,6 +101,8 @@ const Step2 = ({
     };
 
     const handleClickCancel = () => {
+        reset();
+        setEdit({});
         setShowModal(false);
         setStep('step1');
     }

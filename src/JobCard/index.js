@@ -1,10 +1,16 @@
-import React from 'react'
-import Netflix from '../Images/netflix.png'
+import React from 'react';
+import EditIcon from '../Images/edit.png';
+import Netflix from '../Images/netflix.png';
 
-function JobCard({ data = {} }) {
+function JobCard({ data = {}, setEdit = () => {}, setShowModal = () => {} }) {
+    const handleClick = () => {
+        setEdit(data);
+        setShowModal(true);
+    }
+
     return (
         <div className="w-[49%] h-100 px-6 py-4 bg-white rounded-[10px] border border-gray-300">
-            <div className="justify-between items-start inline-flex">
+            <div className="flex justify-between items-start">
                 <div className="w-[357px] justify-start items-start gap-2 flex">
                     <img className="w-12 h-12 rounded-[5px]" src={Netflix} alt="logo"/>
 
@@ -28,6 +34,10 @@ function JobCard({ data = {} }) {
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div className="cursor-pointer" onClick={() => handleClick()}>
+                    <img src={EditIcon} alt='edit' width={20} height={20}/>
                 </div>
             </div>
         </div>
