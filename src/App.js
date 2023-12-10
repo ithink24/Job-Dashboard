@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Loading from './Images/loading.gif'
 import JobCard from './JobCard';
 import useGetJobDetails from './hooks/useGetJobDetails';
 import CreateJobForm from './CreateJobForm';
@@ -15,8 +16,10 @@ function App() {
             </div>
 
             <div className="flex flex-wrap gap-7">
-                {data?.length === 0 && loading ? 
-                    <div>Loading...</div> 
+                {data?.length === 0 && loading ?
+                <div className="w-[100%] h-[700px] flex justify-center items-center">
+                    <img src={Loading} alt="loading"/>
+                </div>
                 : (data || [])?.map((item) => (
                     <JobCard data={item}/>
                 ))}
