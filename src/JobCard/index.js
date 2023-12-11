@@ -10,7 +10,7 @@ function JobCard({ data = {}, setEdit = () => {}, setShowModal = () => {}, refet
     const handleEdit = () => {
         setEdit(data);
         setShowModal(true);
-    }
+    };
 
     return (
         <div className="w-[49%] h-100 px-6 py-4 bg-white rounded-[10px] border border-gray-300">
@@ -26,7 +26,7 @@ function JobCard({ data = {}, setEdit = () => {}, setShowModal = () => {}, refet
                         </div>
 
                         <div className="h-[120px] flex-col justify-start items-start gap-2 flex">
-                            <div className="text-neutral-800 font-['Poppins']">Part-Time (9.00 am - 5.00 pm IST)</div>
+                            <div className="text-neutral-800 font-['Poppins']">Full-Time (9.00 am - 5.00 pm IST)</div>
                             <div className="text-neutral-800 font-['Poppins']">Experience ({data?.experience[0]} - {data?.experience[1]} years)</div>
                             <div className="text-neutral-800 font-['Poppins']">INR (₹) {data?.salary?.[0]} - {data?.salary?.[1]} / Month</div>
                             <div className="text-neutral-800 font-['Poppins']">{data?.total_employee} employees</div>
@@ -34,7 +34,9 @@ function JobCard({ data = {}, setEdit = () => {}, setShowModal = () => {}, refet
 
                         <div className="flex-col justify-center items-start gap-1 flex">
                             <div className="px-4 py-2 bg-sky-500 rounded-md shadow justify-center items-center flex">
-                                <div className="text-white font-medium font-['Poppins']">Apply Now</div>
+                                <div className="text-white font-medium font-['Poppins']">
+                                    {data?.apply_type !== "external_apply" ? "Apply Now" : "External Apply"}
+                                </div>
                             </div>
                         </div>
                     </div>

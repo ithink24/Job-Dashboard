@@ -1,5 +1,4 @@
 export const InputController = (props) => {
-    console.log(props, 'props');
     const {label, register, name, mandatory = false, placeholder, width} = props;
 
     return (

@@ -26,6 +26,10 @@ const defaultValueControls = (data) =>[
         name: 'total_employee',
         value: data?.total_employee || ''
     },
+    {   
+        name: 'apply_type',
+        value: data?.apply_type || ''
+    },
 ]
 
 const Step2 = ({
@@ -81,7 +85,7 @@ const Step2 = ({
                             {section.inputs ? (
                                 <div className="h-[50px] gap-5 justify-start items-start flex">
                                     {section.inputs.map((input, i) => (
-                                    <InputController key={i} {...input} register={register} />
+                                        <InputController key={i} {...input} register={register} />
                                     ))}
                                 </div>
                             ) : null}
@@ -93,9 +97,9 @@ const Step2 = ({
                                         <input
                                             id={radio.id}
                                             type="radio"
-                                            value=""
-                                            name={radio.name}
                                             className="w-4 h-4 mr-2 text-blue-600 bg-gray-100 cursor-pointer"
+                                            {...register("apply_type")}
+                                            value={radio.value}
                                         />
                                         <label htmlFor={radio.id} className="text-neutral-500 text-sm font-normal font-['Poppins']">
                                             {radio.label}

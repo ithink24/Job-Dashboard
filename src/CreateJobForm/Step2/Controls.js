@@ -38,8 +38,8 @@ export const INPUTCONTROLS = [
     {
         label: 'Apply Type',
         radios: [
-            { id: 'quick-radio', label: 'Quick apply' },
-            { id: 'external-radio', label: 'External apply' },
+            { id: 'quick-radio', label: 'Quick apply', value: 'quick_apply', checked: true },
+            { id: 'external-radio', label: 'External apply', value: 'external_apply', checked: true },
         ],
     },
 ]
