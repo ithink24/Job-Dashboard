@@ -100,6 +100,7 @@ const Step2 = ({
                                             className="w-4 h-4 mr-2 text-blue-600 bg-gray-100 cursor-pointer"
                                             {...register("apply_type")}
                                             value={radio.value}
+                                            required
                                         />
                                         <label htmlFor={radio.id} className="text-neutral-500 text-sm font-normal font-['Poppins']">
                                             {radio.label}

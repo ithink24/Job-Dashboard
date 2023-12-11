@@ -32,12 +32,16 @@ function JobCard({ data = {}, setEdit = () => {}, setShowModal = () => {}, refet
                             <div className="text-neutral-800 font-['Poppins']">{data?.total_employee} employees</div>
                         </div>
 
-                        <div className="flex-col justify-center items-start gap-1 flex">
-                            <div className="px-4 py-2 bg-sky-500 rounded-md shadow justify-center items-center flex">
-                                <div className="text-white font-medium font-['Poppins']">
-                                    {data?.apply_type !== "external_apply" ? "Apply Now" : "External Apply"}
+                        <div className="justify-center items-start gap-1 flex">
+                            {data?.apply_type !== "external_apply" ?
+                                <div className="px-4 py-2 bg-sky-500 rounded-md shadow justify-center items-center flex">
+                                    <div className="text-white font-medium font-['Poppins']">Apply Now</div>
                                 </div>
-                            </div>
+                            :
+                                <div className="px-4 py-2 bg-white border border-sky-500 rounded-md justify-center items-center flex">
+                                    <div className="text-sky-500 font-medium font-['Poppins']">External Apply</div>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
