@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Modal } from '../../Components/Modal';
 import { InputController } from '../../Components/InputController';
@@ -41,13 +41,14 @@ const Step2 = ({
     edit = {},
     setEdit = () => {}
 }) => {
+    const [showError, setShowError] = useState('');
     const DEFAULTVALUE = defaultValueControls(edit);
     const { register, handleSubmit, reset, setValue } = useForm();
     const{ createJob, loading } = useCreateJob({refetch, setShowModal, setStep, edit, setEdit, reset});
 
     useEffect(() => {
         DEFAULTVALUE.forEach(({ name, value }) => setValue(name, value));
-    },[setValue])
+    },[setValue]);
 
     let totalData;
     const onSubmit = (data) => {
@@ -56,7 +57,16 @@ const Step2 = ({
         const salary = [min_salary, max_salary];
 
         totalData = {...data, ...stepData, experience, salary};
-        createJob(totalData);
+
+        if (totalData?.experience?.[0] < 0 && totalData?.salary?.[0] < 0) {
+            setShowError('Min Experience and Min Salary cannot be less than 0');
+        } else if (totalData?.experience?.[0] < 0) {
+            setShowError('Min Experience cannot be less than 0');
+        } else if (totalData?.salary?.[0] < 0) {
+            setShowError('Min Salary cannot be less than 0');
+        }else{
+            createJob(totalData);
+        }
     };
 
     const handleClickCancel = () => {
@@ -70,11 +80,13 @@ const Step2 = ({
         <Modal showModal={showModal} setShowModal={setShowModal}>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="w-[550px] h-[500px] p-8 bg-white rounded-[10px] border flex-col justify-start items-center inline-flex">
-                    <div className="flex-col justify-start items-start gap-5 inline-flex">
+                    <div className="flex-col justify-start items-start inline-flex" style={{ gap: showError ? '16px' : '20px' }}>
                         <div className="w-[513px] h-7 justify-between items-center inline-flex">
                             <div className="text-zinc-900 text-xl font-normal font-['Poppins'] leading-7">Create a job</div>
                             <div className="text-right text-zinc-900 text-base font-medium font-['Poppins'] leading-normal">Step 2</div>
                         </div>
+
+                        {showError && <div className="text-red-400 text-xs font-medium font-['Poppins'] leading-tight">{showError}</div>}
 
                         {INPUTCONTROLS.map((section, index) => (
                             <div key={index}>
